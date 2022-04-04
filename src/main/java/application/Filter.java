@@ -21,6 +21,16 @@ public class Filter {
 		/*
 			your code here
 		*/
+		for (int col = 0; col < picture.width(); col++){
+			for (int row = 0; row < picture.height(); row++) {
+				int value = picture.get(col, row).getRed()+picture.get(col,row).getBlue() + picture.get(col,row).getGreen();
+				picture.set(col,row,new Color(value/3,value/3,value/3));
+			}
+		}
+
+
+
+
 		return picture;
 	}
 
@@ -34,6 +44,16 @@ public class Filter {
 		/*
 			your code here
 		*/
+		int r,g,b;
+		for (int col = 0; col < picture.width(); col++){
+			for (int row = 0; row < picture.height(); row++) {
+				r = 255-picture.get(col,row).getRed();
+				g = 255-picture.get(col,row).getGreen();
+				b = 255-picture.get(col,row).getBlue();
+				picture.set(col,row,new Color(r, g, b));
+			}
+
+		}
 		return picture;
 	}
 
@@ -56,6 +76,23 @@ public class Filter {
 		/*
 			your code here
 		*/
+
+		int r,g,b, sepR, sepG, sepB;
+		for (int col = 0; col < picture.width(); col++){
+			for (int row = 0; row < picture.height(); row++) {
+				r = picture.get(col,row).getRed();
+				g = picture.get(col,row).getGreen();
+				b = picture.get(col,row).getBlue();
+
+				sepR = (int)((r * 0.393) + (g * 0.769) + (b * 0.189));
+				sepG = (int)((r * 0.349) + (g * 0.686) + (b * 0.168));
+				sepB = (int)((r * 0.292) + (g * 0.534) + (b * 0.131));
+
+				picture.set(col,row,new Color(Math.min(sepR, 255), Math.min(sepG, 255),Math.min(sepB, 255)));
+			}
+
+		}
+
 		return picture;
 	}
 }
